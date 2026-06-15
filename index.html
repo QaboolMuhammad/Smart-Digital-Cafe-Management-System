@@ -11,132 +11,231 @@
   <div class="bg-orb orb-two"></div>
   <div class="cursor-glow" id="cursorGlow"></div>
 
-  <header class="topbar">
-    <div class="brand"><span>☕</span><div><b>Smart Brew</b><small>Digital Café System</small></div></div>
-    <nav>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#tables">Check-in</a>
-      <a href="#pos">POS Order</a>
-      <a href="#records">Records</a>
-    </nav>
-    <button onclick="scrollToSection('pos')">Create Order</button>
-  </header>
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-icon">☕</div>
+      <h1>Smart Brew</h1>
+      <p>Admin login required to open café dashboard.</p>
+      <input id="mainAdminEmail" type="email" placeholder="Admin email" autocomplete="email" />
+      <input id="mainAdminPassword" type="password" placeholder="Admin password" autocomplete="current-password" />
+      <button onclick="mainAdminLogin()">Login Dashboard</button>
+     
+    </div>
+  </div>
 
-  <main>
-    <section class="hero">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">Qabool Ali• Smart Digital Café Management</p>
-        <h1>Premium café dashboard for orders, table check-in, billing and records.</h1>
-        <p class="subtext">A complete computerized front-end solution for Smart Brew Café with live POS billing, interactive tables, menu search, invoice print and daily sales records.</p>
-        <div class="hero-buttons">
-          <button onclick="scrollToSection('dashboard')">Open Dashboard</button>
-          <button class="ghost" onclick="scrollToSection('tables')">Table Check-in</button>
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <div class="brand">
+        <span>☕</span>
+        <div>
+          <b>Smart Brew</b>
+          <small>Digital Café System</small>
         </div>
       </div>
-      <div class="hero-visual reveal">
-        <div class="cup">☕</div>
-        <div class="live-card">
-          <span>Live Revenue</span>
-          <h2 id="heroRevenue">Rs. 0</h2>
-          <p><b id="heroOrders">0</b> completed orders today</p>
-          <div class="wave"></div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section" id="dashboard">
-      <div class="section-title reveal"><p>Admin Dashboard</p><h2>Today’s Smart Café Snapshot</h2></div>
-      <div class="stats-grid reveal">
-        <div class="stat-card"><span>💰</span><p>Total Sales</p><h3 id="salesTotal">Rs. 0</h3></div>
-        <div class="stat-card"><span>🧾</span><p>Total Orders</p><h3 id="ordersTotal">0</h3></div>
-        <div class="stat-card"><span>🪑</span><p>Busy Tables</p><h3 id="busyTables">0/10</h3></div>
-        <div class="stat-card"><span>📦</span><p>Menu Items</p><h3 id="menuCount">0</h3></div>
-      </div>
-    </section>
+      <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#tables">Check-in</a>
+        <a href="#pos">POS</a>
+        <a href="#staff">Staff</a>
+        <a href="#records">Orders</a>
+      </nav>
 
-    <section class="section split" id="tables">
-      <div class="panel reveal">
-        <div class="panel-head"><div><p>Table Management</p><h2>Customer Check-in</h2></div><button class="small" onclick="resetTables()">Reset Tables</button></div>
-        <div class="check-form">
-          <input id="checkCustomer" placeholder="Customer name" />
-          <input id="checkGuests" type="number" min="1" value="2" placeholder="Guests" />
-          <select id="checkTable"></select>
-          <button onclick="checkInCustomer()">Check-in Customer</button>
-        </div>
-        <div class="tables-grid" id="tablesGrid"></div>
+      <div class="top-actions">
+        <button onclick="scrollToSection('pos')">Create Order</button>
+        <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
       </div>
+    </header>
 
-      <div class="panel reveal">
-        <div class="panel-head"><div><p>Digital Menu</p><h2>Search Products</h2></div></div>
-        <div class="menu-controls">
-          <input id="searchInput" placeholder="Search item..." />
-          <select id="categoryFilter">
-            <option value="all">All</option>
-            <option value="Coffee">Coffee</option>
-            <option value="Fast Food">Fast Food</option>
-            <option value="Dessert">Dessert</option>
-            <option value="Cold Drinks">Cold Drinks</option>
-          </select>
-        </div>
-        <div class="menu-grid" id="menuGrid"></div>
-      </div>
-    </section>
-
-    <section class="section pos-section" id="pos">
-      <div class="section-title reveal"><p>POS Billing</p><h2>Place Order & Generate Invoice</h2></div>
-      <div class="pos-layout reveal">
-        <div class="panel order-panel">
-          <h2>New Order</h2>
-          <div class="form-grid">
-            <input id="customerName" placeholder="Customer name" />
-            <select id="tableSelect"></select>
-            <select id="productSelect"></select>
-            <input id="quantityInput" type="number" min="1" value="1" />
+    <main>
+      <section class="hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Qabool Ali • Smart Digital Café Management</p>
+          <h1>Premium café dashboard for billing, tables, staff and records.</h1>
+          <p class="subtext">Admin login, waiter assignment, table check-in, auto customer fill, invoice print and backend database support.</p>
+          <div class="hero-buttons">
+            <button onclick="scrollToSection('dashboard')">Open Dashboard</button>
+            <button class="ghost" onclick="scrollToSection('staff')">Add Staff</button>
           </div>
-          <button class="wide" onclick="addToCart()">Add Item to Bill</button>
-          <div class="quick-menu" id="quickMenu"></div>
         </div>
 
-        <aside class="invoice" id="invoiceArea">
-          <div class="invoice-head">
-            <div><h2>Smart Brew Café</h2><p>Digital Invoice</p></div>
-            <b id="invoiceNo">#INV-1001</b>
+        <div class="hero-visual reveal">
+          <div class="cup">☕</div>
+          <div class="live-card">
+            <span>Live Revenue</span>
+            <h2 id="heroRevenue">Rs. 0</h2>
+            <p><b id="heroOrders">0</b> completed orders today</p>
+            <div class="wave"></div>
           </div>
-          <div class="invoice-info">
-            <p id="billCustomer">Customer: Walk-in Customer</p>
-            <p id="billTable">Table: Takeaway</p>
-            <p id="billDate"></p>
-          </div>
-          <div class="invoice-items" id="cartItems"><p class="empty">No item added yet.</p></div>
-          <div class="totals">
-            <div><span>Subtotal</span><b id="subtotal">Rs. 0</b></div>
-            <div><span>Tax 5%</span><b id="tax">Rs. 0</b></div>
-            <div class="grand"><span>Grand Total</span><b id="billTotal">Rs. 0</b></div>
-          </div>
-          <div class="invoice-actions no-print">
-            <button onclick="placeOrder()">Place Order</button>
-            <button class="ghost dark" onclick="printBill()">Print Bill</button>
-            <button class="danger" onclick="clearCart()">Clear</button>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="records">
-      <div class="section-title reveal"><p>Records</p><h2>Recent Orders & Business Documents</h2></div>
-      <div class="records-layout reveal">
-        <div class="panel"><h2>Recent Orders</h2><div id="recentOrders"></div></div>
-        <div class="docs-grid">
-          <div class="doc-card">📊<h3>Sales Report</h3><p>Daily revenue and order tracking.</p></div>
-          <div class="doc-card">📦<h3>Inventory Sheet</h3><p>Menu items and stock record.</p></div>
-          <div class="doc-card">👥<h3>Employee Record</h3><p>Staff duties and roles.</p></div>
-          <div class="doc-card">🌐<h3>Online Café Website</h3><p>Customer-facing digital presence.</p></div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer>Smart Digital Café Management System • Developed By Qabool ALi</footer>
+      <section class="section" id="dashboard">
+        <div class="section-title reveal">
+          <p>Admin Dashboard</p>
+          <h2>Today’s Café Snapshot</h2>
+        </div>
+
+        <div class="stats-grid reveal">
+          <div class="stat-card"><span>💰</span><p>Total Sales</p><h3 id="salesTotal">Rs. 0</h3></div>
+          <div class="stat-card"><span>🧾</span><p>Total Orders</p><h3 id="ordersTotal">0</h3></div>
+          <div class="stat-card"><span>🪑</span><p>Busy Tables</p><h3 id="busyTables">0/10</h3></div>
+          <div class="stat-card"><span>👨‍🍳</span><p>Total Staff</p><h3 id="staffTotal">0</h3></div>
+          <div class="stat-card"><span>📦</span><p>Menu Items</p><h3 id="menuCount">0</h3></div>
+        </div>
+      </section>
+
+      <section class="section split" id="tables">
+        <div class="panel reveal">
+          <div class="panel-head">
+            <div><p>Table Management</p><h2>Customer Check-in</h2></div>
+            <button class="small" onclick="resetTables()">Reset All</button>
+          </div>
+
+          <div class="check-form">
+            <input id="checkCustomer" placeholder="Customer name" />
+            <input id="checkGuests" type="number" min="1" value="2" />
+            <select id="checkTable"></select>
+            <select id="checkWaiter"></select>
+            <button onclick="checkInCustomer()">Check-in</button>
+          </div>
+
+          <div class="tables-grid" id="tablesGrid"></div>
+        </div>
+
+        <div class="panel reveal">
+          <div class="panel-head">
+            <div><p>Digital Menu</p><h2>Search Products</h2></div>
+          </div>
+
+          <div class="menu-controls">
+            <input id="searchInput" placeholder="Search item..." />
+            <select id="categoryFilter">
+              <option value="all">All</option>
+              <option value="Coffee">Coffee</option>
+              <option value="Fast Food">Fast Food</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Cold Drinks">Cold Drinks</option>
+            </select>
+          </div>
+
+          <div class="menu-grid" id="menuGrid"></div>
+        </div>
+      </section>
+
+      <section class="section pos-section" id="pos">
+        <div class="section-title reveal">
+          <p>POS Billing</p>
+          <h2>Place Order & Generate Invoice</h2>
+        </div>
+
+        <div class="pos-layout reveal">
+          <div class="panel order-panel">
+            <h2>New Order</h2>
+
+            <div class="form-grid">
+              <input id="customerName" placeholder="Customer name" />
+              <select id="tableSelect"></select>
+              <input id="orderWaiter" placeholder="Assigned waiter" readonly />
+              <select id="productSelect"></select>
+              <input id="quantityInput" type="number" min="1" value="1" />
+            </div>
+
+            <button class="wide" onclick="addToCart()">Add Item to Bill</button>
+
+            <h3 class="quick-title">Quick Add Menu</h3>
+            <div class="quick-menu" id="quickMenu"></div>
+          </div>
+
+          <aside class="invoice" id="invoiceArea">
+            <div class="invoice-head">
+              <div><h2>Smart Brew Café</h2><p>Digital Invoice</p></div>
+              <b id="invoiceNo">#INV-1001</b>
+            </div>
+
+            <div class="invoice-info">
+              <p id="billCustomer">Customer: Walk-in Customer</p>
+              <p id="billTable">Table: Takeaway</p>
+              <p id="billWaiter">Waiter: Not Assigned</p>
+              <p id="billDate"></p>
+            </div>
+
+            <div class="invoice-items" id="cartItems">
+              <p class="empty">No item added yet.</p>
+            </div>
+
+            <div class="totals">
+              <div><span>Subtotal</span><b id="subtotal">Rs. 0</b></div>
+              <div><span>Tax 5%</span><b id="tax">Rs. 0</b></div>
+              <div class="grand"><span>Grand Total</span><b id="billTotal">Rs. 0</b></div>
+            </div>
+
+            <div class="invoice-actions no-print">
+              <button onclick="placeOrder()">Place Order</button>
+              <button class="ghost dark" onclick="printBill()">Print Bill</button>
+              <button class="danger" onclick="clearCart()">Clear</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="staff">
+        <div class="section-title reveal">
+          <p>Staff Management</p>
+          <h2>Add Waiters & Staff</h2>
+        </div>
+
+        <div class="records-layout reveal">
+          <div class="panel">
+            <h2>Add Staff</h2>
+            <div class="form-grid">
+              <input id="staffName" placeholder="Staff name" />
+              <input id="staffPhone" placeholder="Phone number" />
+              <select id="staffRole">
+                <option value="Waiter">Waiter</option>
+                <option value="Cashier">Cashier</option>
+                <option value="Manager">Manager</option>
+                <option value="Chef">Chef</option>
+              </select>
+              <select id="staffShift">
+                <option value="Morning">Morning</option>
+                <option value="Evening">Evening</option>
+                <option value="Night">Night</option>
+              </select>
+            </div>
+            <button class="wide" onclick="addStaff()">Add Staff</button>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <div><p>Backend Records</p><h2>Staff List</h2></div>
+              <button class="small" onclick="loadStaff()">Refresh</button>
+            </div>
+            <div id="staffList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="records">
+        <div class="section-title reveal">
+          <p>MongoDB Records</p>
+          <h2>Recent Orders</h2>
+        </div>
+
+        <div class="panel reveal">
+          <div class="panel-head">
+            <div><p>Saved Orders</p><h2>Order History</h2></div>
+            <button class="small" onclick="loadAdminOrders()">Refresh</button>
+          </div>
+          <div id="recentOrders"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Smart Digital Café Management System • Developed By Qabool Ali</footer>
+  </div>
+
+  <div class="toast-box" id="toastBox"></div>
   <script src="script.js"></script>
 </body>
 </html>
